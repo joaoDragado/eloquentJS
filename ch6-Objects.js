@@ -1,7 +1,7 @@
 // class Constructors
 
 class Rabbit {
-  constructor(type='fluffy') {
+  constructor(type='fluffy', speed=2) {
     this.type = type;
   }
   speak(line) {
@@ -11,6 +11,7 @@ class Rabbit {
 
 let killerRabbit = new Rabbit("killer");
 let blackRabbit = new Rabbit("black");
+
 
 /*
 Class declarations only allow methods—properties that hold functions—to be added to the prototype. 
@@ -110,3 +111,48 @@ console.log([1] instanceof Array);
 // → true
 */
 
+// Get, set, and static
+
+/*
+methods that have static written before their name are stored on the constructor.
+Static methods won’t have access to a class instance, but can for example be used to provide additional ways to create
+instances.
+*/
+/*
+class Temperature {
+  constructor(celsius) {
+    this.celsius = celsius;
+  }
+  get fahrenheit() {
+    return this.celsius * 1.8 + 32;
+  }
+  set fahrenheit(value) {
+    this.celsius = (value - 32) / 1.8;
+  }
+  static fromFahrenheit(value) {
+    return new Temperature((value - 32) / 1.8);
+  }
+}
+
+let temp = new Temperature(22);
+console.log(temp.fahrenheit);
+// → 71.6
+temp.fahrenheit = 86;
+console.log(temp.celsius);
+// → 30
+*/
+
+// Inheritance
+/*
+class Child extends Parent {
+  constructor(...parentArgs, ...childArgs) {
+    // calls the Parent's Constructor
+    super(...parentArgs);
+    // child arguments
+    for (let arg of childArgs) {
+      let this.arg = arg;
+    }
+  }
+
+}
+*/
