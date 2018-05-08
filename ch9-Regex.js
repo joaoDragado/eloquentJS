@@ -55,6 +55,14 @@ The repetition operators ( + , * , ? , and {} ) are greedy, meaning they match a
 there.
 Putting a question mark after them ( +? , *? , ?? , {}? ), they become nongreedy and start by matching as little as possible, matching more only when the remaining pattern does not fit the smaller match.
 
+## Unicode
+
+As far as JavaScript’s regular expressions are concerned, a “word character” is only one of the 26 characters in the Latin alphabet (uppercase or lowercase), decimal digits, and the underscore character.
+By a strange historical accident, \s (whitespace) does not have this problem and matches all characters that the Unicode standard considers whitespace.
+You must add an u option (for Unicode) to your regular expression to make it treat such characters properly.
+it is possible to use \p in a regular expression (that must
+have the Unicode option enabled) to match all characters to which the Unicode standard assigns a given property.
+
 
 // Regex methods
 
@@ -199,7 +207,17 @@ console.log("word".search(/\S/));
 console.log("".search(/\S/));
 // → -1
 
+console.log(/<.>/.test("< 🌹 >"));
+// → false
+console.log(/<.>/u.test("< 🌹 >"));
+// → true
 
-
-
+console.log(/\p{Script=Greek}/u.test("α"));
+// → true
+console.log(/\p{Script=Arabic}/u.test("α"));
+// → false
+console.log(/\p{Alphabetic}/u.test("α"));
+// → true
+console.log(/\p{Alphabetic}/u.test("!"));
+// → false
 */
